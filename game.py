@@ -13,10 +13,11 @@ def create_deck():
             deck.append(card)
             return deck
         
-    def create_deck():
-        for card in deck:
-            print(card.suit, card.rank)
-            print(card.image)
+def print_deck(deck):
+    for card in deck:
+        print(card.suit, card.rank)
+        print(card.image)
+
 
 
 
