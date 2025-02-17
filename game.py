@@ -18,6 +18,3 @@ def print_deck(deck):
         print(card.suit, card.rank)
         print(card.image)
 
-
-
-
