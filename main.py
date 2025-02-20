@@ -5,7 +5,7 @@ from player import Player
 def main():
     # Initialize Pygame and set up the window
     pygame.init()
-    WIDTH, HEIGHT = 800, 600
+    WIDTH, HEIGHT = 1200, 800
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Card Game")
 
