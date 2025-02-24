@@ -1,6 +1,8 @@
 import pygame
 from game import create_deck, deal_cards
 from player import Player
+from ai import choose_card_to_play
+from rules import can_beat, check_winner
 
 def main():
     # Initialize Pygame and set up the window
