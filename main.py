@@ -22,6 +22,8 @@ def main():
     current_player_index = 0
     last_card = None 
     winner = None
+    #initialise the pass counter
+    consecutive_passes = 0
 
     clock = pygame.time.Clock()
     running = True
@@ -44,13 +46,26 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            #check mouse click for user
-            if current_player_index == human_player_index and event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = event.pos
-                #card width and height
-                card_width, card_height = 60, 90  
-                start_x, start_y = 50, 500
-                spacing = 30
+            #only handle user input if it's the human player's turn
+            if current_player_index == human_player_index:
+                
+                #passing logic 
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                    # Human passes
+                    print(f"{current_player.name} passes.")
+                    consecutive_passes += 1
+                    if consecutive_passes >= len(players):
+                        print("All players have passed. Clearing the table.")
+                        last_card = None
+                        consecutive_passes = 0
+                    current_player_index = (current_player_index + 1) % len(players)
+
+                #card click Logic 
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    x, y = event.pos
+                    card_width, card_height = 60, 90
+                    start_x, start_y = 50, 500
+                    spacing = 30
 
                 #determine which card was clicked
                 for i, card in enumerate(current_player.hand):
@@ -65,6 +80,8 @@ def main():
                             print(f"{current_player.name} played {played_card.rank} of {played_card.suit}")
                             # Move to next player
                             current_player_index = (current_player_index + 1) % len(players)
+                            #reset passes because someone played
+                            consecutive_passes = 0
                         else:
                             print("Invalid move! Cannot beat the last card.")
                         break
