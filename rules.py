@@ -17,19 +17,22 @@ SuitOrder = {
 #compare ranks
 def can_beat(firstcard, lastcard):
     if lastcard is None:
-        return True  #any card can be played if there's no last card
-
+        return True  # First move of the round
+    if firstcard is None:
+        return False  # If player passes, they can't play
+    
     rank_new = RankOrder[firstcard.rank]
     rank_old = RankOrder[lastcard.rank]
-
+    
     if rank_new > rank_old:
         return True
-    if rank_new == rank_old:  #if same rank, compare suits
+    elif rank_new == rank_old:
         suit_new = SuitOrder[firstcard.suit]
         suit_old = SuitOrder[lastcard.suit]
-        return suit_new > suit_old  #true if new suit is stronger
+        return suit_new > suit_old
+    
+    return False
 
-    return False  #default case, firstcard cannot beat lastcard
 
 
 #check winner
@@ -54,7 +57,7 @@ def is_valid_double_triple_quad(cards):
     return False
 #combo
 def is_valid_combo(cards):
-    if len(cards) >= 3 & cards[0].rank != "2":
+    if len(cards) >= 3 and cards[0].rank != "2":
         return len(cards)
     else:
         print("invalid combo")

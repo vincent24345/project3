@@ -1,17 +1,20 @@
 class Player:
     def __init__(self, name, hand):
-        self.name = name  # Store the player's name
-        self.hand = hand  # Store the player's hand (a list of Card objects)
+        self.name = name
+        self.hand = hand  # List of Card objects
 
     def play_card(self, index):
+        """Plays a card from the player's hand."""
         if 0 <= index < len(self.hand):
-            return self.hand.pop(index)
-        else:
-            print("Invalid index!")
-            return None
+            return self.hand.pop(index)  # Removes and returns the card
+        return None
+
 
     def add_card(self, card):
         self.hand.append(card)
+
+
+
 
 
 
