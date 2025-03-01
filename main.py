@@ -4,13 +4,14 @@ from player import Player
 from ai import choose_card_to_play
 from rules import can_beat, check_winner
 from card import Card  
-from ui import draw_skip_button, handle_events, SKIP_BUTTON
+from ui import draw_skip_button, handle_events, SKIP_BUTTON, show_winner_screen, restart_screen
+import time
 
 def handle_mouse_click(event, player, last_card):
     """Handles mouse clicks to play cards."""
     if event.type == pygame.MOUSEBUTTONDOWN:
         x, y = event.pos
-        card_width = 60  # Approximate card width
+        card_width = 130
         spacing = 30
         start_x, start_y = 50, 500
 
@@ -101,12 +102,13 @@ def main():
                     consecutive_passes = 0  
 
             current_player_index = (current_player_index + 1) % len(players)
-
-        # Check for a winner
+        #game logic (handling player turns, checking for winner)
         winner = check_winner(players)
+        
         if winner:
-            print(f"{winner.name} wins!")
-            running = False
+            show_winner_screen(screen, winner)
+            running = restart_screen(screen)  #restart game once clicked
+
 
         pygame.display.flip()
         clock.tick(30)
@@ -123,4 +125,7 @@ def draw_player_hand(screen, hand, start_pos):
         x += spacing
 
 if __name__ == "__main__":
-    main()
+    while True:  
+        main()
+
+

@@ -39,9 +39,10 @@ def can_beat(firstcard, lastcard):
 
 def check_winner(players):
     for player in players:
-        if len(player.hand) == 0:
+        if not player.hand:
             return player
-        return None
+    return None  
+
 #double/triple/quad
 def is_valid_double_triple_quad(cards):
     if len(cards) == 1:
@@ -58,10 +59,10 @@ def is_valid_double_triple_quad(cards):
 #combo
 def is_valid_combo(cards):
     if len(cards) >= 3 and cards[0].rank != "2":
-        return len(cards)
-    else:
-        print("invalid combo")
-        return False
+        return True
+    print("Invalid combo")
+    return False
+
 #chop
 def is_valid_chop(cards):
     if len(cards) != 6:
